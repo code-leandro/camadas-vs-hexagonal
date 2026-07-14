@@ -73,6 +73,12 @@ disponível em `/h2-console` enquanto a aplicação estiver rodando.
 - **`CadastrarUsuarioService` (hexagonal)** — um caso de uso, uma classe,
   dependendo só de uma porta (`UserRepositoryPort`) — não sabe se existe
   JPA, banco, ou qualquer detalhe de infraestrutura por trás.
+- **Dois adapters de entrada (`adapter/in/web` e `adapter/in/messaging`)** —
+  o mesmo caso de uso (`CadastrarUsuarioUseCase`) pode ser acionado por
+  HTTP ou por mensageria, sem nenhuma mudança no núcleo da aplicação.
+  O listener é ilustrativo (não conectado a um broker real), mas mostra
+  que a porta de entrada não sabe — nem precisa saber — quem está do
+  outro lado.
 
 ## O que este projeto não é
 
