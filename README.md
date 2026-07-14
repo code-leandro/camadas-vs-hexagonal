@@ -12,18 +12,41 @@ comparar a estrutura de código real das duas abordagens.
 
 ```
 src/main/java/com/leware/camadasvshexagonal/
-├── camadas/       — versão em arquitetura em camadas
+├── camadas/                          — versão em arquitetura em camadas
 │   ├── CamadasApplication.java
 │   ├── controller/
+│   │   └── UserController.java
 │   ├── service/
+│   │   └── UserService.java
 │   ├── repository/
+│   │   └── UserJpaRepository.java
 │   ├── entity/
+│   │   └── UserEntity.java
 │   └── dto/
-└── hexagonal/      — versão em arquitetura hexagonal (ports & adapters)
+│       └── UserDTO.java
+└── hexagonal/                        — versão em arquitetura hexagonal (ports & adapters)
     ├── HexagonalApplication.java
     ├── domain/
+    │   └── User.java
     ├── application/
+    │   ├── port/
+    │   │   ├── in/
+    │   │   │   └── CadastrarUsuarioUseCase.java   (porta de entrada)
+    │   │   └── out/
+    │   │       └── UserRepositoryPort.java        (porta de saída)
+    │   └── service/
+    │       └── CadastrarUsuarioService.java       (implementa a porta de entrada)
     └── adapter/
+        ├── in/
+        │   ├── web/
+        │   │   └── UserController.java            (aciona a porta via HTTP)
+        │   └── messaging/
+        │       └── CadastroUsuarioListener.java    (aciona a mesma porta via mensageria — ilustrativo, não conectado a um broker real)
+        └── out/
+            └── persistence/
+                ├── UserJpaAdapter.java             (implementa a porta de saída)
+                ├── UserJpaEntity.java
+                └── UserSpringDataRepository.java
 ```
 
 ## Como rodar
